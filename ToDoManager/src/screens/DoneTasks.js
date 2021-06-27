@@ -33,7 +33,6 @@ export default class DoneTasks extends Component {
     this.setState({tasks: tasksToDo})
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

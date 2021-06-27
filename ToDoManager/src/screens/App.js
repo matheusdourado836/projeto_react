@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import {StyleSheet, ActivityIndicator, View, Text} from 'react-native'
 import {CommonActions} from '@react-navigation/native'
 import {currentFirebaseUser} from '../services/FirebaseApi'
@@ -44,5 +44,3 @@ const styles = StyleSheet.create({
     height: 50,
   },
 })
-
-export default App

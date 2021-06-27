@@ -32,7 +32,7 @@ export default class ToDoTasks extends Component {
     )
   }
   _goToTask () {
-    this.props.navigation.navigate('pageTask')
+    this.props.navigation.navigate('Task')
   }
   componentDidMount () {
     readTasksFromFirebaseAsync(this._fetchTasks.bind(this))

@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from 'react-native'
-
 export default class TaskListView extends Component {
   _renderSectionHeader (sectionData) {
     return (
@@ -20,10 +19,9 @@ export default class TaskListView extends Component {
       </View>
     )
   }
-
   _renderItem (itemData) {
     return (
-      <TouchableOpacity onPress={() => this._onClickTask(itemData.item)} >
+      <TouchableOpacity onPress={() => this._onClickTask(itemData.item)}>
         <View style={styles.itemConteiner}>
           <Text style={styles.itemTextTitle}>{itemData.item.title}</Text>
           <Text>{itemData.item.resume}</Text>
@@ -31,33 +29,35 @@ export default class TaskListView extends Component {
       </TouchableOpacity>
     )
   }
-
+  _onClickTask (task) {
+    const {navigate} = this.props.navigation
+    navigate('Task', {task})
+  }
   render () {
     return (
       <SectionList
-        renderSectionHeader={section => this.renderSectionHeader(section)}
+        renderSectionHeader={section => this._renderSectionHeader(section)}
         sections={[
           {
-            data: this.state.tasks.filter(data => {
+            data: this.props.tasks.filter(data => {
               return data.priority
             }),
             key: 'hightPriority',
             title: 'Hight Priority',
           },
           {
-            data: this.state.tasks.filter(data => {
+            data: this.props.tasks.filter(data => {
               return !data.priority
             }),
             key: 'lowPriority',
             title: 'Low Priority',
           },
         ]}
-        renderItem={data => this.renderItem(data)}
+        renderItem={data => this._renderItem(data)}
       />
     )
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

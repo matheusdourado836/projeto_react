@@ -14,27 +14,24 @@ import {CommonActions} from '@react-navigation/native'
 
 const img = require('../assets/logo.png')
 
-const signInAsync = async () => {
-  try {
-    const user = await signInOnFirebaseAsync(email, password)
-    Alert.alert(
-      'User Authenticated',
-      `User ${user.user.email} has succesfuly been authenticated!`,
-    )
-    props.navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{name: 'TaskList'}],
-      }),
-    )
-  } catch (error) {
-    Alert.alert('Login Failed', error.message)
-  }
-}
-
 const Login = props => {
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(props.email)
   const [password, setPassword] = useState('')
+
+  const signInAsync = async () => {
+    try {
+      const user = await signInOnFirebaseAsync(email, password)
+      props.navigation.dispatch(
+        CommonActions.reset({
+          index: 0,
+          routes: [{name: 'TaskList'}],
+        }),
+      )
+    } catch (error) {
+      Alert.alert('Login Failed', error.message)
+    }
+  }
+
   return (
     <KeyboardAvoidingView style={styles.container} behavior='padding'>
       <View style={styles.topView}>
@@ -57,7 +54,10 @@ const Login = props => {
           onChangeText={password => setPassword(password)}
         />
 
-        <Button title='Sign In' onPress={() => signInAsync()} />
+        <Button title='Sign In' onPress={() => {
+          signInAsync()
+        }} />
+
         <View style={styles.textConteiner}>
           <Text>Not a member? Let's </Text>
           <Text

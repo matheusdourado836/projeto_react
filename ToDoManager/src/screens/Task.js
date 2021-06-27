@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import {View, TextInput, Switch, Text, Button, StyleSheet} from 'react-native'
+import {View, TextInput, Switch, Text, Button, StyleSheet, Alert} from 'react-native'
 import {writeTaskOnFirebaseAsync} from '../services/FirebaseApi'
-
 export default class Task extends Component {
   static navigationOptions = {
     title: 'Task',
@@ -24,7 +23,10 @@ export default class Task extends Component {
         priority: task.priority,
         isDone: task.isDone,
       }
-    } catch (error) {}
+    } catch (error) {
+      Alert.alert(`Erro: ${error}`)
+      console.log(`ERROOOOOOOOOOO ${error}`)
+    }
   }
   render () {
     return (
